@@ -4,8 +4,13 @@
   "description": "ClojureScript on LeanEngine",
   "main": "out/leanengine_cljs.js",
   "scripts": {
+    "start": "node out/leanengine_cljs.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "leanengine": "^0.4.0"
+  }
 }

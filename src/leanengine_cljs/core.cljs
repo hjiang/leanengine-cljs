@@ -11,12 +11,12 @@
 
 (defn -main [& args]
   (.initialize leanengine
-               (-> process (.-env) (.-LC_APP_ID))
-               (-> process (.-env) (.-LC_APP_KEY))
-               (-> process (.-env) (.-LC_APP_MASTER_KEY)))
-  (-> leanengine (.Cloud) (.useMasterKey))
+               (-> js/process (.-env) (.-LC_APP_ID))
+               (-> js/process (.-env) (.-LC_APP_KEY))
+               (-> js/process (.-env) (.-LC_APP_MASTER_KEY)))
+  (-> leanengine (.-Cloud) (.useMasterKey))
   ;; initialize app
-  (let [port (parseInt (or (-> process (.-env) (.-LC_APP_PORT)) 3000))
+  (let [port (js/parseInt (or (-> js/process (.-env) (.-LC_APP_PORT)) 3000))
         app (express)]
     (.use app (.-Cloud leanengine))
     (.get app "/" (fn [req res] (.send res "Hello LeanEngine!")))

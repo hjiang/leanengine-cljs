@@ -1,9 +1,6 @@
 (ns leanengine-cljs.core
   (:require [cljs.nodejs :as nodejs]))
 
-;; (defonce conn
-;;   (repl/connect "http://localhost:9000/repl"))
-
 (def leanengine (nodejs/require "leanengine"))
 (def express (nodejs/require "express"))
 
@@ -15,7 +12,6 @@
                (-> js/process (.-env) (.-LC_APP_KEY))
                (-> js/process (.-env) (.-LC_APP_MASTER_KEY)))
   (-> leanengine (.-Cloud) (.useMasterKey))
-  ;; initialize app
   (let [port (js/parseInt (or (-> js/process (.-env) (.-LC_APP_PORT)) 3000))
         app (express)]
     (.use app (.-Cloud leanengine))

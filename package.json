@@ -1,0 +1,11 @@
+{
+  "name": "leanengine-cljs",
+  "version": "1.0.0",
+  "description": "ClojureScript on LeanEngine",
+  "main": "out/leanengine_cljs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

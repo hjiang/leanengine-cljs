@@ -4,8 +4,15 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.8.51"]]
   :jvm-opts ^:replace ["-Xmx1g" "-server"]
-  :plugins [[lein-npm "0.6.1"]]
-  :npm {:dependencies [[source-map-support "0.4.0"]]}
+  :plugins [[lein-cljsbuild "1.1.3"]]
   :source-paths ["src" "target/classes"]
   :clean-targets ["out" "release"]
-  :target-path "target")
+  :target-path "target"
+  :cljsbuild {:builds[{:id "default"
+                       :source-paths ["src"]
+                       :compiler {:main leanengine-cljs.core
+                                  :output-to "out/leanengine_cljs.js"
+                                  :output-dir "out"
+                                  :target :nodejs
+                                  :optimizations :none
+                                  :source-map true}}]})

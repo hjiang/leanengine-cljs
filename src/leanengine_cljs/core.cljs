@@ -1,19 +1,20 @@
 (ns leanengine-cljs.core
-  (:require [cljs.nodejs :as nodejs]))
+  (:require [cljs.nodejs :as node]))
 
-(def leanengine (nodejs/require "leanengine"))
-(def express (nodejs/require "express"))
+(def leanengine (node/require "leanengine"))
+(def express (node/require "express"))
 
-(nodejs/enable-util-print!)
+(node/enable-util-print!)
 
 (defn -main [& args]
-  (.initialize leanengine
-               (-> js/process (.-env) (.-LC_APP_ID))
-               (-> js/process (.-env) (.-LC_APP_KEY))
-               (-> js/process (.-env) (.-LC_APP_MASTER_KEY)))
-  (-> leanengine (.-Cloud) (.useMasterKey))
   (let [port (js/parseInt (or (-> js/process (.-env) (.-LC_APP_PORT)) 3000))
-        app (express)]
+        app (express)
+        env (.-env js/process)]
+    (.initialize leanengine
+               (.-LC_APP_ID env)
+               (.-LC_APP_KEY env)
+               (.-LC_APP_MASTER_KEY env))
+    (-> leanengine (.-Cloud) (.useMasterKey))
     (.use app (.-Cloud leanengine))
     (.get app "/" (fn [req res] (.send res "Hello LeanEngine!")))
     (.listen app port (fn [] (println "App is running!")))))

@@ -1,5 +1,6 @@
 (ns leanengine-cljs.core
-  (:require [cljs.nodejs :as node]))
+  (:require [cljs.nodejs :as node]
+            [leanengine-cljs.cloud]))
 
 (def leanengine (node/require "leanengine"))
 (def express (node/require "express"))
